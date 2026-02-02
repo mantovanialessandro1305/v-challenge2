@@ -42,7 +42,7 @@
             <input type="text" id="log-user" placeholder="AGENT NAME">
             <input type="password" id="log-pass" placeholder="PASSWORD">
             <button onclick="login()">AUTHORIZE ACCESS</button>
-            <button class="secondary-btn" style="color:var(--matrix-green)" onclick="alert('MISSION OBJECTIVE:\nComplete 22 verbs in the shortest time possible.\n\nSCORING SYSTEM:\n- Finish within 2:30 min: 4 POINTS\n- Finish within 3:30 min: 3 POINTS\n- Finish within 4:00 min: 2 POINTS\n\nWARNING: Any error will reset your current round score to 0!')">SYSTEM PROTOCOLS</button>
+            <button class="secondary-btn" style="color:var(--matrix-green)" onclick="alert('MISSION OBJECTIVE:\nComplete 22 verbs within 4 minutes.\n\nSCORING RULES:\n- Completion: 2 PTS\n- Bonus < 3:30 min: +1 PT (Total 3)\n- Bonus < 2:30 min: +2 PTS (Total 4)\n\nWARNING: Errors reset your current round!')">SYSTEM PROTOCOLS</button>
             <button class="secondary-btn" onclick="promptAdmin()" style="opacity:0.3; font-size:0.7rem;">ADMIN PANEL</button>
         </div>
         <div id="user-dash" class="hidden">
@@ -192,13 +192,13 @@
         let pts = 0;
         
         if (win) {
-            let timeUsed = 240 - timeLeft; // Tempo totale trascorso in secondi
+            let timeUsed = 240 - timeLeft; // Calcolo tempo trascorso
             
-            if (timeUsed <= 150) { // Entro 2 minuti e 30 secondi (150s)
+            if (timeUsed <= 150) {      // Bonus 2 punti se entro 2:30 min (150s)
                 pts = 4;
-            } else if (timeUsed <= 210) { // Entro 3 minuti e 30 secondi (210s)
+            } else if (timeUsed <= 210) { // Bonus 1 punto se entro 3:30 min (210s)
                 pts = 3;
-            } else { // Entro i 4 minuti (240s)
+            } else {                     // 2 punti base se entro i 4 min
                 pts = 2;
             }
         }
